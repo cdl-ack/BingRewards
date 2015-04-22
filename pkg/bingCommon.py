@@ -38,7 +38,7 @@ USER_AGENTS_PC = (
 
 USER_AGENTS_MOBILE = (
 # Android 5.0.1
-    "Mozilla/5.0 (Linux; Android 5.0.1; Nexus 4 Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.109 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 5.1; Nexus 4 Build/LMY470) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.108 Mobile Safari/537.36",
 # Android 2.3
 # BlackBerry - BB10
 # iPhone - iOS 7
