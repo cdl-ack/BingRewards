@@ -12,6 +12,7 @@ import time
 import urllib
 import urllib2
 import importlib
+import sys
 
 import bingCommon
 import bingFlyoutParser as bfp
@@ -290,6 +291,7 @@ class BingRewards:
             url = BING_QUERY_URL + urllib.quote_plus(query.encode('utf-8'))
 
             print "%s - %2d/%2d - Search: %s" % (helpers.getLoggingTime(), i, totalQueries, query)
+            sys.stdout.flush()
 
             request = urllib2.Request(url = url, headers = bingCommon.HEADERS)
             with self.opener.open(request) as response:
