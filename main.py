@@ -21,18 +21,19 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "pkg"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "pkg", "queryGenerators"))
 
 from bingAuth import BingAuth, AuthenticationError
-from bingRewards import BingRewards, BannedError
+from bingRewards import BingRewards
 from config import BingRewardsReportItem, Config, ConfigError
 from eventsProcessor import EventsProcessor
 import bingCommon
 import bingFlyoutParser as bfp
 import helpers
+from helpers import BingAccountError
 
 verbose = False
 totalPoints = 0
 
-SCRIPT_VERSION = "3.8.8"
-SCRIPT_DATE = "February 12, 2015"
+SCRIPT_VERSION = "3.9.0"
+SCRIPT_DATE = "March 27, 2015"
 
 def earnRewards(config, httpHeaders, userAgents, reportItem, password):
     """Earns Bing! reward points and populates reportItem"""
@@ -56,7 +57,7 @@ def earnRewards(config, httpHeaders, userAgents, reportItem, password):
         if verbose:
             bingRewards.printRewards(rewards)
         print ("%s - %s" % (reportItem.accountType, reportItem.accountLogin))
-        results = bingRewards.process(rewards)
+        results = bingRewards.process(rewards, verbose)
 
         if verbose:
             print
@@ -110,9 +111,9 @@ def earnRewards(config, httpHeaders, userAgents, reportItem, password):
         reportItem.error = e
         print "Connection reset by peer."
 
-    except BannedError as e:
+    except BingAccountError as e:
         reportItem.error = e
-        print "Warning: Account banned (at least temporarily): %r" % e
+        print "BingAccountError: %s" % e
 
     finally:
         if not noException:
@@ -223,7 +224,7 @@ def __run(config):
         report.append(reportItem)
         doSleep = True
 
-    
+
     #
     # trigger full report if needed
     #
@@ -247,7 +248,7 @@ def __run(config):
     print "Total points earned: %d" % totalPoints
     print
     print "%s - script ended" % helpers.getLoggingTime()
-    
+
     EventsProcessor.onScriptComplete(config)
 
 if __name__ == "__main__":
