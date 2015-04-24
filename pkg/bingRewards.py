@@ -370,6 +370,9 @@ class BingRewards:
 
         return res
 
+    def __processTrivia(self, reward, verbose):
+        pass
+
     def process(self, rewards, verbose):
         """
         Runs an action for each of rewards as described in self.RewardType
@@ -392,6 +395,8 @@ class BingRewards:
                 res = self.__processWarn(r)
             elif action == bfp.Reward.Type.Action.SEARCH:
                 res = self.__processSearch(r, verbose)
+            elif action == bfp.Reward.Type.Action.TRIVIA:
+                pass
             else:
                 res = self.RewardResult(r)
 

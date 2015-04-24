@@ -44,6 +44,7 @@ class Reward:
 
         SEARCH_AND_EARN_DESCR_RE = re.compile("Earn (\d+) credits? per (\d+) Bing search(es)? up to (\d+) credits? a day")
         EARN_CREDITS_RE = re.compile("Earn (\d+) credits?")
+        TRIVIA_RE = re.compile(".*[Tt]rivia.*")
 
 #       Alias                   Index Reward.name
 #                           optional(Reward.description)                         isRe?  Action
@@ -61,9 +62,11 @@ class Reward:
         COMPLETED            = (10,    "Completed",                        None, False, Action.PASS)
         SILVER_STATUS        = (11,   "Silver Status",                     None, False, Action.PASS)
         INVITE_FRIENDS       = (12,   "Invite friends",                    None, False, Action.PASS)
+        TRIVIA               = (13,   TRIVIA_RE,                           None, True,  Action.INFORM)
 
         ALL = (RE_EARN_CREDITS_PASS, RE_EARN_CREDITS, SEARCH_MOBILE, SEARCH_PC, YOUR_GOAL, MAINTAIN_GOLD,
-               REFER_A_FRIEND, SEND_A_TWEET, RE_EARNED_CREDITS, COMPLETED, SILVER_STATUS, INVITE_FRIENDS)
+               REFER_A_FRIEND, SEND_A_TWEET, RE_EARNED_CREDITS, COMPLETED, SILVER_STATUS, INVITE_FRIENDS,
+               TRIVIA)
 
     def __init__(self):
         self.url = ""               # optional
