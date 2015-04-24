@@ -28,6 +28,7 @@ class Reward:
             HIT    = 2
             SEARCH = 3
             WARN   = 4
+            TRIVIA = 5
 
             @staticmethod
             def toStr(action):
