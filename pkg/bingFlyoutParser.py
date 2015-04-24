@@ -32,7 +32,7 @@ class Reward:
 
             @staticmethod
             def toStr(action):
-                actions = ("pass", "inform", "hit", "search", "warn")
+                actions = ("pass", "inform", "hit", "search", "warn","trivia")
                 return (actions[action])
 
         class Col:
