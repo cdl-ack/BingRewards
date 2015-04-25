@@ -13,6 +13,7 @@ import urllib
 import urllib2
 import importlib
 import re
+import logging
 
 import bingCommon
 import bingFlyoutParser as bfp
@@ -69,7 +70,9 @@ class BingRewards:
         self.queryGenerator = config.queryGenerator
 
         cookies = cookielib.CookieJar()
-
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
+        self.logger.info('starting logger')
         if config.proxy:
             if config.proxy.login:
                 proxyString = "%s:%s@%s" % ( config.proxy.login, config.proxy.password, config.proxy.url )
@@ -371,13 +374,14 @@ class BingRewards:
         return res
 
     def __processTrivia(self, reward, verbose):
-        pass
+        print processTrivia
 
     def process(self, rewards, verbose):
         """
         Runs an action for each of rewards as described in self.RewardType
         returns results list of self.RewardResult objects
         """
+        self.logger.INFO('process')
         if rewards is None or not isinstance(rewards, list):
             raise TypeError("rewards is not an instance of list")
 
@@ -396,7 +400,7 @@ class BingRewards:
             elif action == bfp.Reward.Type.Action.SEARCH:
                 res = self.__processSearch(r, verbose)
             elif action == bfp.Reward.Type.Action.TRIVIA:
-                pass
+                res = self.__processTrivia(r, verbose)
             else:
                 res = self.RewardResult(r)
 
