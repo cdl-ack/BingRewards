@@ -13,6 +13,7 @@ import random
 import sys
 import time
 import urllib2
+import logging
 
 from socket import error as SocketError
 import errno
@@ -253,7 +254,7 @@ def __run(config):
 
 if __name__ == "__main__":
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hf:rv", ["help", "configFile=", "full-report", "verbose", "version"])
+        opts, args = getopt.getopt(sys.argv[1:], "hf:l:rv", ["help", "configFile=", "logFile=", "full-report", "verbose", "version"])
     except getopt.GetoptError, e:
         print "getopt.GetoptError: %s" % e
         usage()
@@ -267,6 +268,8 @@ if __name__ == "__main__":
             sys.exit()
         elif o in ("-f", "--configFile"):
             configFile = a
+        elif o in ("-l", "logFile"):
+            logFile = a
         elif o in ("-r", "--full-report"):
             showFullReport = True
         elif o in ("-v", "--verbose"):
